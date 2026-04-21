@@ -69,7 +69,6 @@
 <script>
 const GITHUB_USER = 'yugofutbol-afk';
 const GITHUB_REPO = 'kupamag';
-const SITE_NAME   = 'KupaMag';
 
 async function loadPosts() {
   const url = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/_posts`;
@@ -79,7 +78,7 @@ async function loadPosts() {
     if (!res.ok) throw new Error();
     files = await res.json();
   } catch {
-    renderEmpty('GitHub bilgileri henüz ayarlanmamış.');
+    renderEmpty('Yazılar yüklenemedi.');
     return;
   }
   const posts = [];
@@ -104,7 +103,7 @@ function parseFrontmatter(raw, filename) {
     body = match[2];
   }
   const slug = filename.replace(/^\d{4}-\d{2}-\d{2}-/, '').replace('.md','');
-  const excerpt = meta.excerpt || body.replace(/[#*`]/g,'').slice(0,120).trim() + '…';
+  const excerpt = meta.excerpt || body.replace(/[#*`]/g,'').slice(0,120).trim() + '...';
   return { ...meta, slug, body, excerpt, filename };
 }
 
@@ -114,46 +113,51 @@ function formatDate(d) {
 }
 
 function renderEmpty(msg) {
-  document.getElementById('app').innerHTML = `<div class="empty"><strong>Henüz yazı yok</strong>${msg || 'Admin panelinden ilk yazını ekle.'}</div>`;
+  document.getElementById('app').innerHTML = '<div class="empty"><strong>Henüz yazi yok</strong>' + (msg || 'Admin panelinden ilk yazini ekle.') + '</div>';
 }
 
 function renderPage(posts) {
-  const [hero, ...rest] = posts;
-  let html = `
-  <div class="hero">
-    <div class="hero-card" onclick="openPost('${hero.slug}')">
-      <div class="hero-content">
-        <div>
-          <div class="hero-category">${hero.category || 'Genel'}</div>
-          <h1 class="hero-title">${hero.title || 'Başlıksız'}</h1>
-          <p class="hero-excerpt">${hero.excerpt}</p>
-        </div>
-        <div class="hero-meta">${formatDate(hero.date)}</div>
-      </div>
-      <div class="hero-image">
-        ${hero.image ? `<img src="${hero.image}" alt="${hero.title}">` : `<div class="placeholder"></div>`}
-      </div>
-    </div>
-  </div>`;
+  var hero = posts[0];
+  var rest = posts.slice(1);
+  var html = '<div class="hero"><div class="hero-card" onclick="openPost(\'' + hero.slug + '\')">';
+  html += '<div class="hero-content"><div>';
+  html += '<div class="hero-category">' + (hero.category || 'Genel') + '</div>';
+  html += '<h1 class="hero-title">' + (hero.title || 'Baslıksız') + '</h1>';
+  html += '<p class="hero-excerpt">' + hero.excerpt + '</p>';
+  html += '</div><div class="hero-meta">' + formatDate(hero.date) + '</div></div>';
+  html += '<div class="hero-image">';
+  if (hero.image) {
+    html += '<img src="' + hero.image + '" alt="' + (hero.title || '') + '">';
+  } else {
+    html += '<div class="placeholder"></div>';
+  }
+  html += '</div></div></div>';
+
   if (rest.length > 0) {
-    html += `<div class="section-divider"><span>Son Yazılar</span></div><div class="grid">`;
-    for (const p of rest) {
-      html += `<div class="card" onclick="openPost('${p.slug}')">
-        ${p.image ? `<img class="card-image" src="${p.image}" alt="${p.title}">` : `<div class="card-image-placeholder"></div>`}
-        <div class="card-category">${p.category || 'Genel'}</div>
-        <h2 class="card-title">${p.title || 'Başlıksız'}</h2>
-        <p class="card-excerpt">${p.excerpt}</p>
-        <div class="card-meta">${formatDate(p.date)}</div>
-      </div>`;
+    html += '<div class="section-divider"><span>Son Yazılar</span></div><div class="grid">';
+    for (var i = 0; i < rest.length; i++) {
+      var p = rest[i];
+      html += '<div class="card" onclick="openPost(\'' + p.slug + '\')">';
+      if (p.image) {
+        html += '<img class="card-image" src="' + p.image + '" alt="' + (p.title || '') + '">';
+      } else {
+        html += '<div class="card-image-placeholder"></div>';
+      }
+      html += '<div class="card-category">' + (p.category || 'Genel') + '</div>';
+      html += '<h2 class="card-title">' + (p.title || 'Baslıksız') + '</h2>';
+      html += '<p class="card-excerpt">' + p.excerpt + '</p>';
+      html += '<div class="card-meta">' + formatDate(p.date) + '</div>';
+      html += '</div>';
     }
-    html += `</div>`;
+    html += '</div>';
   }
   document.getElementById('app').innerHTML = html;
 }
 
 function openPost(slug) {
-  window.location.href = `/post/?slug=${slug}`;
+  window.location.href = '/post/?slug=' + slug;
 }
+
 loadPosts();
 </script>
 </body>
