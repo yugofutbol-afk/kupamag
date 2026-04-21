@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -9,18 +8,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0d0d0d;
-      --bg2: #141414;
-      --bg3: #1c1c1c;
-      --border: #2a2a2a;
-      --border2: #333;
-      --text: #e8e4dc;
-      --text-muted: #7a7570;
-      --text-dim: #4a4540;
-      --accent: #c9a84c;
-      --accent-hover: #e8c97a;
-      --danger: #c04a4a;
-      --success: #4a9c6a;
+      --bg: #0d0d0d; --bg2: #141414; --bg3: #1c1c1c;
+      --border: #2a2a2a; --border2: #333;
+      --text: #e8e4dc; --text-muted: #7a7570; --text-dim: #4a4540;
+      --accent: #c9a84c; --accent-hover: #e8c97a;
+      --danger: #c04a4a; --success: #4a9c6a;
       --serif: 'Playfair Display', Georgia, serif;
       --sans: 'IBM Plex Sans', sans-serif;
       --mono: 'IBM Plex Mono', monospace;
@@ -28,151 +20,101 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body { background: var(--bg); color: var(--text); font-family: var(--sans); min-height: 100vh; }
 
-    /* ── LOGIN ── */
-    #login-screen {
-      display: flex; align-items: center; justify-content: center;
-      min-height: 100vh; padding: 24px;
-    }
-    .login-box {
-      width: 100%; max-width: 400px;
-      background: var(--bg2); border: 1px solid var(--border);
-      padding: 48px 40px;
-    }
-    .login-logo {
-      font-family: var(--serif); font-size: 2rem; font-weight: 700;
-      margin-bottom: 8px;
-    }
+    #login-screen { display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 24px; }
+    .login-box { width: 100%; max-width: 400px; background: var(--bg2); border: 1px solid var(--border); padding: 48px 40px; }
+    .login-logo { font-family: var(--serif); font-size: 2rem; font-weight: 700; margin-bottom: 8px; }
     .login-logo span { color: var(--accent); }
     .login-subtitle { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 36px; letter-spacing: 0.05em; }
     .login-box label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); display: block; margin-bottom: 8px; }
-    .login-box input {
-      width: 100%; background: var(--bg3); border: 1px solid var(--border2);
-      color: var(--text); padding: 12px 14px; font-family: var(--sans); font-size: 0.9rem;
-      margin-bottom: 20px; outline: none; transition: border-color 0.2s;
-    }
+    .login-box input { width: 100%; background: var(--bg3); border: 1px solid var(--border2); color: var(--text); padding: 12px 14px; font-family: var(--sans); font-size: 0.9rem; margin-bottom: 20px; outline: none; transition: border-color 0.2s; }
     .login-box input:focus { border-color: var(--accent); }
-    .btn-primary {
-      width: 100%; background: var(--accent); color: #0d0d0d;
-      border: none; padding: 13px; font-family: var(--sans); font-size: 0.82rem;
-      font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;
-      cursor: pointer; transition: background 0.2s;
-    }
+    .btn-primary { width: 100%; background: var(--accent); color: #0d0d0d; border: none; padding: 13px; font-family: var(--sans); font-size: 0.82rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; cursor: pointer; transition: background 0.2s; }
     .btn-primary:hover { background: var(--accent-hover); }
     .login-error { color: var(--danger); font-size: 0.78rem; margin-top: 12px; display: none; }
+    .token-hint { font-size: 0.72rem; color: var(--text-dim); margin-top: 10px; line-height: 1.6; }
+    .token-hint a { color: var(--accent); }
 
-    /* ── APP ── */
     #app { display: none; }
-
-    .app-header {
-      border-bottom: 1px solid var(--border); background: var(--bg);
-      position: sticky; top: 0; z-index: 50;
-    }
-    .app-header-inner {
-      max-width: 1100px; margin: 0 auto; padding: 0 24px;
-      display: flex; align-items: center; justify-content: space-between; height: 56px;
-    }
+    .app-header { border-bottom: 1px solid var(--border); background: var(--bg); position: sticky; top: 0; z-index: 50; }
+    .app-header-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 56px; }
     .app-logo { font-family: var(--serif); font-size: 1.3rem; }
     .app-logo span { color: var(--accent); }
     .header-actions { display: flex; gap: 12px; align-items: center; }
-    .btn-sm {
-      padding: 7px 16px; font-family: var(--sans); font-size: 0.72rem;
-      font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;
-      cursor: pointer; border: none; transition: all 0.2s;
-    }
+    .btn-sm { padding: 7px 16px; font-family: var(--sans); font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; cursor: pointer; border: none; transition: all 0.2s; }
     .btn-new { background: var(--accent); color: #0d0d0d; }
     .btn-new:hover { background: var(--accent-hover); }
     .btn-ghost { background: transparent; color: var(--text-muted); border: 1px solid var(--border2); }
     .btn-ghost:hover { color: var(--text); border-color: var(--text-muted); }
     .btn-danger { background: var(--danger); color: #fff; }
     .btn-danger:hover { background: #e05555; }
+    .btn-upload { background: var(--bg3); color: var(--text-muted); border: 1px solid var(--border2); padding: 8px 14px; font-family: var(--sans); font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+    .btn-upload:hover { border-color: var(--accent); color: var(--accent); }
 
-    .main-wrap {
-      max-width: 1100px; margin: 0 auto; padding: 32px 24px;
-      display: grid; grid-template-columns: 280px 1fr; gap: 24px;
-      align-items: start;
-    }
+    .main-wrap { max-width: 1100px; margin: 0 auto; padding: 32px 24px; display: grid; grid-template-columns: 280px 1fr; gap: 24px; align-items: start; }
 
-    /* ── YAZLAR LİSTESİ ── */
-    .sidebar {
-      background: var(--bg2); border: 1px solid var(--border);
-      position: sticky; top: 80px;
-    }
-    .sidebar-header {
-      padding: 16px 20px; border-bottom: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: space-between;
-    }
+    .sidebar { background: var(--bg2); border: 1px solid var(--border); position: sticky; top: 80px; }
+    .sidebar-header { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
     .sidebar-title { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-muted); }
     #post-count { font-size: 0.7rem; color: var(--text-dim); }
-
     #post-list { max-height: calc(100vh - 200px); overflow-y: auto; }
-    .post-item {
-      padding: 14px 20px; border-bottom: 1px solid var(--border);
-      cursor: pointer; transition: background 0.15s;
-    }
+    .post-item { padding: 14px 20px; border-bottom: 1px solid var(--border); cursor: pointer; transition: background 0.15s; }
     .post-item:hover { background: var(--bg3); }
     .post-item.active { background: var(--bg3); border-left: 2px solid var(--accent); }
     .post-item-title { font-size: 0.88rem; font-weight: 500; margin-bottom: 4px; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .post-item-meta { font-size: 0.68rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.06em; }
-
     .sidebar-empty { padding: 32px 20px; text-align: center; color: var(--text-dim); font-size: 0.82rem; }
 
-    /* ── EDITOR ── */
-    .editor-panel {
-      background: var(--bg2); border: 1px solid var(--border);
-    }
-    .editor-panel-header {
-      padding: 18px 24px; border-bottom: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: space-between;
-    }
+    .editor-panel { background: var(--bg2); border: 1px solid var(--border); }
+    .editor-panel-header { padding: 18px 24px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
     .editor-panel-title { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-muted); }
     .editor-actions { display: flex; gap: 8px; }
-
     .editor-body { padding: 24px; }
 
     .field-group { margin-bottom: 20px; }
-    .field-group label {
-      display: block; font-size: 0.68rem; text-transform: uppercase;
-      letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 8px;
-    }
-    .field-group input, .field-group select, .field-group textarea {
-      width: 100%; background: var(--bg3); border: 1px solid var(--border2);
-      color: var(--text); padding: 10px 14px; font-family: var(--sans);
-      font-size: 0.9rem; outline: none; transition: border-color 0.2s;
-      resize: vertical;
-    }
-    .field-group input:focus, .field-group select:focus, .field-group textarea:focus {
-      border-color: var(--accent);
-    }
-    .field-group select option { background: var(--bg3); }
-
+    .field-group label { display: block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 8px; }
+    .field-group input, .field-group select, .field-group textarea { width: 100%; background: var(--bg3); border: 1px solid var(--border2); color: var(--text); padding: 10px 14px; font-family: var(--sans); font-size: 0.9rem; outline: none; transition: border-color 0.2s; resize: vertical; }
+    .field-group input:focus, .field-group select:focus, .field-group textarea:focus { border-color: var(--accent); }
     .field-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
 
-    #content-field {
-      font-family: var(--mono); font-size: 0.85rem; line-height: 1.7;
-      min-height: 320px; padding: 16px;
-    }
+    /* GÖRSEL ALANI */
+    .image-field-wrap { display: flex; gap: 8px; align-items: stretch; }
+    .image-field-wrap input { flex: 1; }
+    .image-preview { margin-top: 10px; display: none; }
+    .image-preview img { max-height: 120px; border: 1px solid var(--border2); opacity: 0.85; }
 
-    .status-bar {
-      padding: 10px 24px 20px;
-      font-size: 0.72rem; color: var(--text-dim);
-      display: flex; justify-content: space-between; align-items: center;
-    }
+    /* İÇERİK EDİTÖRÜ */
+    .content-toolbar { display: flex; gap: 6px; margin-bottom: 8px; flex-wrap: wrap; }
+    .toolbar-btn { background: var(--bg3); border: 1px solid var(--border2); color: var(--text-muted); padding: 5px 10px; font-family: var(--sans); font-size: 0.7rem; cursor: pointer; transition: all 0.15s; }
+    .toolbar-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .toolbar-btn.img-btn { background: var(--bg3); border-color: var(--accent); color: var(--accent); }
+
+    #content-field { font-family: var(--mono); font-size: 0.85rem; line-height: 1.7; min-height: 320px; padding: 16px; }
+
+    /* GÖRSEL YÜKLEME MODALİ */
+    .upload-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 200; align-items: center; justify-content: center; }
+    .upload-modal.open { display: flex; }
+    .upload-box { background: var(--bg2); border: 1px solid var(--border); padding: 36px; max-width: 440px; width: 100%; }
+    .upload-box h3 { font-family: var(--serif); font-size: 1.2rem; margin-bottom: 20px; }
+    .drop-zone { border: 2px dashed var(--border2); padding: 40px; text-align: center; cursor: pointer; transition: border-color 0.2s; margin-bottom: 16px; }
+    .drop-zone:hover, .drop-zone.drag { border-color: var(--accent); }
+    .drop-zone p { font-size: 0.82rem; color: var(--text-muted); }
+    .drop-zone strong { display: block; font-size: 0.9rem; color: var(--text); margin-bottom: 8px; }
+    .upload-progress { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 12px; min-height: 20px; }
+    .upload-progress.ok { color: var(--success); }
+    .upload-progress.err { color: var(--danger); }
+    .upload-modal-actions { display: flex; gap: 8px; justify-content: flex-end; }
+
+    .status-bar { padding: 10px 24px 20px; font-size: 0.72rem; color: var(--text-dim); display: flex; justify-content: space-between; align-items: center; }
     #status-msg { transition: color 0.3s; }
     #status-msg.ok { color: var(--success); }
     #status-msg.err { color: var(--danger); }
 
-    /* ── WELCOME ── */
-    .welcome {
-      text-align: center; padding: 80px 40px; color: var(--text-muted);
-    }
+    .welcome { text-align: center; padding: 80px 40px; color: var(--text-muted); }
     .welcome h2 { font-family: var(--serif); font-size: 1.8rem; color: var(--text); margin-bottom: 12px; }
     .welcome p { font-size: 0.88rem; line-height: 1.7; }
 
-    /* TOKEN HINT */
-    .token-hint {
-      font-size: 0.72rem; color: var(--text-dim); margin-top: 10px; line-height: 1.6;
-    }
-    .token-hint a { color: var(--accent); }
+    /* GİZLİ DOSYA INPUT */
+    #file-input-cover, #file-input-inline { display: none; }
 
     @media (max-width: 800px) {
       .main-wrap { grid-template-columns: 1fr; }
@@ -186,25 +128,34 @@
 <!-- LOGIN -->
 <div id="login-screen">
   <div class="login-box">
-    <div class="login-logo">Yazı<span>lar</span></div>
+    <div class="login-logo">Kupa<span>Mag</span></div>
     <div class="login-subtitle">YÖNETİM PANELİ</div>
-
     <label>GitHub Kullanıcı Adı</label>
     <input type="text" id="gh-user" placeholder="kullanici_adin">
-
     <label>GitHub Repo Adı</label>
-    <input type="text" id="gh-repo" placeholder="blog">
-
+    <input type="text" id="gh-repo" placeholder="kupamag">
     <label>GitHub Personal Access Token</label>
     <input type="password" id="gh-token" placeholder="ghp_...">
-    <div class="token-hint">
-      Token almak için: <a href="https://github.com/settings/tokens/new" target="_blank">github.com/settings/tokens</a> →
-      "Contents" iznini seç → Oluştur.
-    </div>
-
+    <div class="token-hint">Token almak için: <a href="https://github.com/settings/tokens/new" target="_blank">github.com/settings/tokens</a> → "Contents" → Read and write → Oluştur.</div>
     <br><br>
     <button class="btn-primary" onclick="doLogin()">Giriş Yap</button>
     <div class="login-error" id="login-error">Bağlantı kurulamadı. Bilgileri kontrol et.</div>
+  </div>
+</div>
+
+<!-- GÖRSEL YÜKLEME MODALİ -->
+<div class="upload-modal" id="upload-modal">
+  <div class="upload-box">
+    <h3>Görsel Yükle</h3>
+    <div class="drop-zone" id="drop-zone" onclick="document.getElementById('file-input-modal').click()">
+      <strong>Tıkla veya görseli buraya sürükle</strong>
+      <p>JPG, PNG, GIF, WEBP — max 5MB</p>
+    </div>
+    <input type="file" id="file-input-modal" accept="image/*" onchange="handleModalFile(this)">
+    <div class="upload-progress" id="upload-progress"></div>
+    <div class="upload-modal-actions">
+      <button class="btn-sm btn-ghost" onclick="closeUploadModal()">İptal</button>
+    </div>
   </div>
 </div>
 
@@ -212,7 +163,7 @@
 <div id="app">
   <div class="app-header">
     <div class="app-header-inner">
-      <div class="app-logo">Yazı<span>lar</span> <span style="color:var(--text-dim);font-family:var(--sans);font-size:0.7rem;font-weight:400;margin-left:8px;letter-spacing:0.08em;text-transform:uppercase;">Yönetim</span></div>
+      <div class="app-logo">Kupa<span>Mag</span> <span style="color:var(--text-dim);font-family:var(--sans);font-size:0.7rem;font-weight:400;margin-left:8px;letter-spacing:0.08em;text-transform:uppercase;">Yönetim</span></div>
       <div class="header-actions">
         <a href="/" target="_blank" class="btn-sm btn-ghost">Siteyi Gör</a>
         <button class="btn-sm btn-new" onclick="newPost()">+ Yeni Yazı</button>
@@ -229,11 +180,10 @@
       </div>
       <div id="post-list"><div class="sidebar-empty">Yükleniyor…</div></div>
     </div>
-
     <div class="editor-panel" id="editor-panel">
       <div class="welcome">
         <h2>Hoş geldin</h2>
-        <p>Soldaki listeden bir yazı seç ya da<br>"+ Yeni Yazı" ile başla.</p>
+        <p>Soldaki listeden bir yazı seç<br>ya da "+ Yeni Yazı" ile başla.</p>
       </div>
     </div>
   </div>
@@ -241,7 +191,8 @@
 
 <script>
 let GH_USER = '', GH_REPO = '', GH_TOKEN = '';
-let currentFile = null; // { name, sha }
+let currentFile = null;
+let uploadTarget = null; // 'cover' veya 'inline'
 
 // ── AUTH ──
 function doLogin() {
@@ -249,38 +200,24 @@ function doLogin() {
   GH_REPO  = document.getElementById('gh-repo').value.trim();
   GH_TOKEN = document.getElementById('gh-token').value.trim();
   if (!GH_USER || !GH_REPO || !GH_TOKEN) { showLoginError('Tüm alanları doldur.'); return; }
-
-  // Bağlantıyı test et
-  ghFetch(`contents/_posts`, 'GET')
-    .then(res => {
-      if (res.ok || res.status === 404) {
-        localStorage.setItem('gh_user', GH_USER);
-        localStorage.setItem('gh_repo', GH_REPO);
-        localStorage.setItem('gh_token', GH_TOKEN);
-        showApp();
-      } else { showLoginError('Token veya repo bilgisi hatalı.'); }
-    })
-    .catch(() => showLoginError('Bağlantı hatası.'));
+  ghFetch('contents/_posts', 'GET').then(res => {
+    if (res.ok || res.status === 404) {
+      localStorage.setItem('gh_user', GH_USER);
+      localStorage.setItem('gh_repo', GH_REPO);
+      localStorage.setItem('gh_token', GH_TOKEN);
+      showApp();
+    } else { showLoginError('Token veya repo bilgisi hatalı.'); }
+  }).catch(() => showLoginError('Bağlantı hatası.'));
 }
 
-function doLogout() {
-  localStorage.clear(); location.reload();
-}
+function doLogout() { localStorage.clear(); location.reload(); }
+function showLoginError(msg) { const el = document.getElementById('login-error'); el.textContent = msg; el.style.display = 'block'; }
 
-function showLoginError(msg) {
-  const el = document.getElementById('login-error');
-  el.textContent = msg; el.style.display = 'block';
-}
-
-// ── INIT ──
 window.onload = () => {
   const u = localStorage.getItem('gh_user');
   const r = localStorage.getItem('gh_repo');
   const t = localStorage.getItem('gh_token');
-  if (u && r && t) {
-    GH_USER = u; GH_REPO = r; GH_TOKEN = t;
-    showApp();
-  }
+  if (u && r && t) { GH_USER = u; GH_REPO = r; GH_TOKEN = t; showApp(); }
 };
 
 function showApp() {
@@ -291,16 +228,97 @@ function showApp() {
 
 // ── GITHUB API ──
 function ghFetch(path, method, body) {
-  const opts = {
-    method,
-    headers: {
-      'Authorization': `Bearer ${GH_TOKEN}`,
-      'Content-Type': 'application/json',
-      'Accept': 'application/vnd.github+json'
-    }
-  };
+  const opts = { method, headers: { 'Authorization': `Bearer ${GH_TOKEN}`, 'Content-Type': 'application/json', 'Accept': 'application/vnd.github+json' } };
   if (body) opts.body = JSON.stringify(body);
   return fetch(`https://api.github.com/repos/${GH_USER}/${GH_REPO}/${path}`, opts);
+}
+
+// ── GÖRSEL YÜKLEME ──
+function openUploadModal(target) {
+  uploadTarget = target;
+  document.getElementById('upload-modal').classList.add('open');
+  document.getElementById('upload-progress').textContent = '';
+  document.getElementById('upload-progress').className = 'upload-progress';
+}
+
+function closeUploadModal() {
+  document.getElementById('upload-modal').classList.remove('open');
+  uploadTarget = null;
+}
+
+function handleModalFile(input) {
+  const file = input.files[0];
+  if (!file) return;
+  uploadImage(file);
+}
+
+// Drag & drop
+document.addEventListener('DOMContentLoaded', () => {
+  const dz = document.getElementById('drop-zone');
+  if (!dz) return;
+  dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('drag'); });
+  dz.addEventListener('dragleave', () => dz.classList.remove('drag'));
+  dz.addEventListener('drop', e => {
+    e.preventDefault(); dz.classList.remove('drag');
+    const file = e.dataTransfer.files[0];
+    if (file && file.type.startsWith('image/')) uploadImage(file);
+  });
+});
+
+async function uploadImage(file) {
+  const prog = document.getElementById('upload-progress');
+  prog.textContent = 'Yükleniyor…';
+  prog.className = 'upload-progress';
+
+  if (file.size > 5 * 1024 * 1024) { prog.textContent = 'Dosya 5MB\'dan büyük olamaz.'; prog.className = 'upload-progress err'; return; }
+
+  const ext = file.name.split('.').pop().toLowerCase();
+  const filename = `images/${Date.now()}.${ext}`;
+
+  const reader = new FileReader();
+  reader.onload = async (e) => {
+    const base64 = e.target.result.split(',')[1];
+    const res = await ghFetch(`contents/${filename}`, 'PUT', {
+      message: `Görsel eklendi: ${filename}`,
+      content: base64
+    });
+
+    if (res.ok) {
+      const imageUrl = `https://raw.githubusercontent.com/${GH_USER}/${GH_REPO}/main/${filename}`;
+      prog.textContent = '✓ Yüklendi!';
+      prog.className = 'upload-progress ok';
+
+      if (uploadTarget === 'cover') {
+        document.getElementById('f-image').value = imageUrl;
+        showImagePreview(imageUrl);
+      } else if (uploadTarget === 'inline') {
+        insertAtCursor(`![görsel](${imageUrl})`);
+      }
+
+      setTimeout(() => closeUploadModal(), 800);
+    } else {
+      prog.textContent = 'Yükleme hatası. Token iznini kontrol et.';
+      prog.className = 'upload-progress err';
+    }
+  };
+  reader.readAsDataURL(file);
+}
+
+function showImagePreview(url) {
+  const prev = document.getElementById('cover-preview');
+  if (!prev) return;
+  prev.style.display = 'block';
+  prev.querySelector('img').src = url;
+}
+
+function insertAtCursor(text) {
+  const ta = document.getElementById('content-field');
+  if (!ta) return;
+  const start = ta.selectionStart;
+  const end = ta.selectionEnd;
+  ta.value = ta.value.slice(0, start) + '\n' + text + '\n' + ta.value.slice(end);
+  ta.selectionStart = ta.selectionEnd = start + text.length + 2;
+  ta.focus();
 }
 
 // ── POSTS ──
@@ -310,29 +328,24 @@ async function loadPosts() {
   const res = await ghFetch('contents/_posts', 'GET');
   if (!res.ok) { posts = []; renderList(); return; }
   const data = await res.json();
-  posts = Array.isArray(data)
-    ? data.filter(f => f.name.endsWith('.md')).sort((a,b) => b.name.localeCompare(a.name))
-    : [];
+  posts = Array.isArray(data) ? data.filter(f => f.name.endsWith('.md')).sort((a,b) => b.name.localeCompare(a.name)) : [];
   renderList();
 }
 
 function renderList() {
   const el = document.getElementById('post-list');
   document.getElementById('post-count').textContent = posts.length + ' yazı';
-  if (posts.length === 0) {
-    el.innerHTML = '<div class="sidebar-empty">Henüz yazı yok.</div>'; return;
-  }
+  if (posts.length === 0) { el.innerHTML = '<div class="sidebar-empty">Henüz yazı yok.</div>'; return; }
   el.innerHTML = posts.map(p => {
     const title = p.name.replace(/^\d{4}-\d{2}-\d{2}-/, '').replace('.md','').replace(/-/g,' ');
-    const date  = p.name.match(/^(\d{4}-\d{2}-\d{2})/)?.[1] || '';
-    return `<div class="post-item" id="item-${p.sha?.slice(0,8)}" onclick="editPost('${p.name}')">
+    const date = p.name.match(/^(\d{4}-\d{2}-\d{2})/)?.[1] || '';
+    return `<div class="post-item" onclick="editPost('${p.name}')">
       <div class="post-item-title">${title}</div>
       <div class="post-item-meta">${date}</div>
     </div>`;
   }).join('');
 }
 
-// ── EDIT / NEW ──
 function newPost() {
   currentFile = null;
   renderEditor('', '', '', '', '', '', '');
@@ -343,30 +356,18 @@ async function editPost(filename) {
   const file = posts.find(p => p.name === filename);
   if (!file) return;
   document.querySelectorAll('.post-item').forEach(el => el.classList.remove('active'));
-
   const res = await fetch(file.download_url);
   const raw = await res.text();
   const parsed = parseFrontmatter(raw);
   currentFile = { name: file.name, sha: file.sha };
-  renderEditor(
-    parsed.title || '',
-    parsed.date || '',
-    parsed.category || '',
-    parsed.excerpt || '',
-    parsed.image || '',
-    parsed.body || '',
-    file.name
-  );
+  renderEditor(parsed.title||'', parsed.date||'', parsed.category||'', parsed.excerpt||'', parsed.image||'', parsed.body||'', file.name);
 }
 
 function parseFrontmatter(raw) {
   const m = raw.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
   if (!m) return { body: raw };
   const meta = {};
-  m[1].split('\n').forEach(line => {
-    const [k,...v] = line.split(':');
-    if (k) meta[k.trim()] = v.join(':').trim().replace(/^["']|["']$/g,'');
-  });
+  m[1].split('\n').forEach(line => { const [k,...v] = line.split(':'); if (k) meta[k.trim()] = v.join(':').trim().replace(/^["']|["']$/g,''); });
   return { ...meta, body: m[2] };
 }
 
@@ -399,23 +400,44 @@ function renderEditor(title, date, category, excerpt, image, body, filename) {
         <input type="text" id="f-excerpt" value="${escHtml(excerpt)}" placeholder="Ana sayfada görünür">
       </div>
       <div class="field-group">
-        <label>Kapak Görseli URL (opsiyonel)</label>
-        <input type="text" id="f-image" value="${escHtml(image)}" placeholder="https://...">
+        <label>Kapak Görseli</label>
+        <div class="image-field-wrap">
+          <input type="text" id="f-image" value="${escHtml(image)}" placeholder="https://... veya yükle →">
+          <button class="btn-upload" onclick="openUploadModal('cover')">📷 Görsel Yükle</button>
+        </div>
+        <div class="image-preview" id="cover-preview">
+          <img src="${image || ''}" alt="kapak">
+        </div>
+        ${image ? `<script>document.getElementById('cover-preview').style.display='block';<\/script>` : ''}
       </div>
       <div class="field-group">
         <label>İçerik (Markdown)</label>
-        <textarea id="content-field" rows="18">${escHtml(body)}</textarea>
+        <div class="content-toolbar">
+          <button class="toolbar-btn" onclick="wrapText('**','**')"><b>K</b></button>
+          <button class="toolbar-btn" onclick="wrapText('*','*')"><i>İ</i></button>
+          <button class="toolbar-btn" onclick="wrapText('## ','')">H2</button>
+          <button class="toolbar-btn" onclick="wrapText('### ','')">H3</button>
+          <button class="toolbar-btn" onclick="wrapText('> ','')">Alıntı</button>
+          <button class="toolbar-btn img-btn" onclick="openUploadModal('inline')">🖼 Yazı İçi Görsel Ekle</button>
+        </div>
+        <textarea id="content-field" rows="20">${escHtml(body)}</textarea>
       </div>
     </div>
     <div class="status-bar">
       <span id="status-msg">Hazır.</span>
-      <span style="font-size:0.68rem;color:var(--text-dim)">Markdown destekleniyor: **kalın**, *italik*, ## başlık, > alıntı</span>
+      <span style="font-size:0.68rem;color:var(--text-dim)">**kalın** · *italik* · ## başlık · > alıntı</span>
     </div>`;
 }
 
-function today() {
-  return new Date().toISOString().slice(0,10);
+function wrapText(before, after) {
+  const ta = document.getElementById('content-field');
+  const start = ta.selectionStart, end = ta.selectionEnd;
+  const selected = ta.value.slice(start, end);
+  ta.value = ta.value.slice(0, start) + before + selected + after + ta.value.slice(end);
+  ta.focus();
 }
+
+function today() { return new Date().toISOString().slice(0,10); }
 function escHtml(s) { return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 function slugify(s) { return s.toLowerCase().replace(/ğ/g,'g').replace(/ü/g,'u').replace(/ş/g,'s').replace(/ı/g,'i').replace(/ö/g,'o').replace(/ç/g,'c').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''); }
 
@@ -432,45 +454,20 @@ async function savePost() {
   const excerpt  = document.getElementById('f-excerpt').value.trim();
   const image    = document.getElementById('f-image').value.trim();
   const body     = document.getElementById('content-field').value;
-
   if (!title) { setStatus('Başlık zorunlu!', 'err'); return; }
-
   const slug = slugify(title);
   const filename = currentFile ? currentFile.name : `${date}-${slug}.md`;
-  const frontmatter = [
-    '---',
-    `title: "${title}"`,
-    `date: ${date}`,
-    `category: "${category}"`,
-    excerpt ? `excerpt: "${excerpt}"` : '',
-    image   ? `image: "${image}"` : '',
-    '---',
-    ''
-  ].filter(l => l !== '').join('\n');
-
+  const frontmatter = ['---', `title: "${title}"`, `date: ${date}`, `category: "${category}"`, excerpt ? `excerpt: "${excerpt}"` : '', image ? `image: "${image}"` : '', '---', ''].filter(l => l !== '').join('\n');
   const content = frontmatter + '\n' + body;
   const encoded = btoa(unescape(encodeURIComponent(content)));
-
   setStatus('Kaydediliyor…');
-
-  const payload = {
-    message: currentFile ? `Güncellendi: ${title}` : `Yeni yazı: ${title}`,
-    content: encoded,
-    ...(currentFile ? { sha: currentFile.sha } : {})
-  };
-
+  const payload = { message: currentFile ? `Güncellendi: ${title}` : `Yeni yazı: ${title}`, content: encoded, ...(currentFile ? { sha: currentFile.sha } : {}) };
   const res = await ghFetch(`contents/_posts/${filename}`, 'PUT', payload);
   if (res.ok) {
     setStatus('✓ Yayınlandı!', 'ok');
     await loadPosts();
-    if (!currentFile) {
-      currentFile = { name: filename };
-      const data = await res.json();
-      currentFile.sha = data.content?.sha;
-    } else {
-      const data = await res.json();
-      currentFile.sha = data.content?.sha;
-    }
+    const data = await res.json();
+    currentFile = { name: filename, sha: data.content?.sha };
   } else {
     const err = await res.json();
     setStatus('Hata: ' + (err.message || 'bilinmeyen'), 'err');
@@ -481,17 +478,12 @@ async function deletePost() {
   if (!currentFile) return;
   if (!confirm(`"${currentFile.name}" silinsin mi?`)) return;
   setStatus('Siliniyor…');
-  const res = await ghFetch(`contents/_posts/${currentFile.name}`, 'DELETE', {
-    message: `Silindi: ${currentFile.name}`,
-    sha: currentFile.sha
-  });
+  const res = await ghFetch(`contents/_posts/${currentFile.name}`, 'DELETE', { message: `Silindi: ${currentFile.name}`, sha: currentFile.sha });
   if (res.ok) {
     currentFile = null;
     document.getElementById('editor-panel').innerHTML = `<div class="welcome"><h2>Silindi</h2><p>Yazı kaldırıldı.</p></div>`;
     await loadPosts();
-  } else {
-    setStatus('Silme hatası.', 'err');
-  }
+  } else { setStatus('Silme hatası.', 'err'); }
 }
 </script>
 </body>
